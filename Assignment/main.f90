@@ -1,10 +1,11 @@
 program main
-    use chebyshev_module
+    use gauss_chebyshov
     implicit none
 
     integer :: n, i
     real(8) :: a, b
     real(8), allocatable :: x(:), w(:)
+    real(8) :: result
     real :: start_time, end_time
 
     ! Solicitar los valores de a, b y n al usuario
@@ -17,18 +18,16 @@ program main
 
     call cpu_time(start_time)
 
-    ! Si yo hago aqui el allocate, se vuelve loco con la referencia y printea la direccion de memoria. Investigarlo
+    allocate(x(n))
+    allocate(w(n))
 
     ! Llamar a la subrutina para calcular los nodos y pesos
     call chebyshev_nodes(a, b, n, x, w)
+    
+    ! Calcular la integral
+    result = gauss(f, x, w, n)
 
     call cpu_time(end_time)
-
-    ! Imprimir los nodos calculados
-    print *, "Nodos de Chebyshev:"
-    do i = 1, n
-        print *, "x(", i, ") = ", x(i), " ; w(", i, ") = ", w(i)
-    end do
 
     ! Liberar memoria
     deallocate(x)
@@ -36,4 +35,20 @@ program main
 
     print *, "Tiempo de calculo: ", end_time - start_time
 
+    print *, "El resultado de la integral es: ", result
+
+
+    contains
+        function f(x) result(result)
+            implicit none
+            real(8), intent(in) :: x
+            real(8) :: result
+        
+            ! Cálculo de la función
+            result = x**2
+        end function f
+
+
 end program main
+
+
