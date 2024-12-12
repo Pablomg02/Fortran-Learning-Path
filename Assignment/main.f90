@@ -45,7 +45,7 @@ program main
             real(8) :: result
         
             ! Cálculo de la función
-            result = x**2
+            result = 3*x**3 + 5
         end function f
 
 
