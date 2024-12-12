@@ -8,11 +8,14 @@ program main
     real(8) :: result
     real :: start_time, end_time
 
+    a = -1.0d0
+    b = 1.0d0
+
     ! Solicitar los valores de a, b y n al usuario
-    print *, "Introduce el valor de a:"
-    read *, a
-    print *, "Introduce el valor de b:"
-    read *, b
+    !print *, "Introduce el valor de a:"
+    !read *, a
+    !print *, "Introduce el valor de b:"
+    !read *, b
     print *, "Introduce el numero de nodos n:"
     read *, n
 
@@ -45,7 +48,7 @@ program main
             real(8) :: result
         
             ! Cálculo de la función
-            result = 3*x**3 + 5
+            result = cos(x)
         end function f
 
 
